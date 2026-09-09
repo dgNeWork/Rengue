@@ -1,0 +1,58 @@
+---
+import { contact } from "../data/site";
+---
+
+<section id="contacto" class="bg-ink py-24 text-cream">
+	<div class="mx-auto max-w-4xl px-6 text-center">
+		<p class="text-sm uppercase tracking-[0.3em] text-gold-light">Contacto</p>
+		<h2 class="mt-4 font-serif text-3xl sm:text-4xl">¿Hablamos?</h2>
+		<p class="mx-auto mt-4 max-w-xl text-cream/70">
+			Escríbenos por WhatsApp o Instagram para consultas, encargos o visitarnos
+			en tienda.
+		</p>
+
+		<div class="mt-10 flex flex-wrap justify-center gap-4">
+			<a
+				href={`https://wa.me/${contact.whatsappNumber}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink transition hover:bg-gold-light"
+			>
+				WhatsApp
+			</a>
+			<a
+				href={`https://instagram.com/${contact.instagramHandle}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="rounded-full border border-cream/40 px-6 py-3 text-sm font-semibold text-cream transition hover:border-cream"
+			>
+				Instagram
+			</a>
+		</div>
+
+		<div class="mt-14 grid gap-8 border-t border-cream/10 pt-10 text-left text-sm text-cream/70 sm:grid-cols-2">
+			<div>
+				<p class="font-medium text-cream">Dirección</p>
+				<p class="mt-1">{contact.address}</p>
+			</div>
+			<div>
+				<p class="font-medium text-cream">Horario</p>
+				{contact.schedule.map((row) => (
+					<p class="mt-1">
+						<span class="text-cream">{row.days}:</span> {row.hours}
+					</p>
+				))}
+			</div>
+		</div>
+
+		<div class="mt-10 overflow-hidden rounded-2xl border border-cream/10">
+			<iframe
+				title={`Mapa de ${contact.address}`}
+				src={`https://maps.google.com/maps?q=${contact.mapsQuery}&z=16&output=embed`}
+				class="h-72 w-full grayscale invert-[0.92]"
+				loading="lazy"
+				referrerpolicy="no-referrer-when-downgrade"
+			></iframe>
+		</div>
+	</div>
+</section>

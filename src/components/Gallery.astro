@@ -1,0 +1,133 @@
+---
+import { Image } from "astro:assets";
+
+// Todas las fotos de products/escaparate/pasarela (no el logo, y tampoco
+// coleccion/: esas ya se ven arriba en "Colección" — si también saliesen
+// aquí, aparecerían repetidas). Cualquier carpeta nueva que se añada bajo
+// src/assets/ (que no sea coleccion/) aparece aquí automáticamente.
+const galleryImages = import.meta.glob<{ default: ImageMetadata }>(
+	[
+		"../assets/**/*.{jpeg,jpg,png}",
+		"!../assets/logo.jpg",
+		"!../assets/logo-mark.jpg",
+		"!../assets/coleccion/**",
+	],
+	{ eager: true },
+);
+
+// El orden viene del número al principio del nombre del archivo, contando
+// todas las carpetas juntas (no la ruta completa) — así el orden se decide
+// solo renombrando archivos. Ver src/assets/README.md.
+const photos = Object.entries(galleryImages)
+	.sort(([a], [b]) => {
+		const nameA = a.split("/").pop() ?? a;
+		const nameB = b.split("/").pop() ?? b;
+		return nameA.localeCompare(nameB);
+	})
+	.map(([, mod]) => mod.default);
+---
+
+{photos.length > 0 && (
+	<section id="galeria" class="bg-cream py-24">
+		<div class="mx-auto max-w-5xl px-6">
+			<div class="mx-auto max-w-2xl text-center">
+				<p class="text-sm uppercase tracking-[0.3em] text-gold-dark">Galería</p>
+				<h2 class="mt-4 font-serif text-3xl text-ink sm:text-4xl">
+					Momentos e imágenes de Rengue
+				</h2>
+			</div>
+
+			<div class="mt-12" data-gallery>
+				<div class="relative overflow-hidden rounded-2xl bg-ink/5">
+					{photos.map((photo, i) => (
+						<Image
+							src={photo}
+							alt=""
+							width={1200}
+							height={1200}
+							loading={i === 0 ? "eager" : "lazy"}
+							data-gallery-full
+							class:list={[
+								"mx-auto max-h-[70vh] w-full object-contain",
+								i !== 0 && "hidden",
+							]}
+						/>
+					))}
+
+					<button
+						type="button"
+						data-gallery-prev
+						aria-label="Foto anterior"
+						class="absolute top-1/2 left-3 -translate-y-1/2 rounded-full bg-cream/90 px-3 py-2 text-lg text-ink shadow transition hover:bg-cream"
+					>
+						‹
+					</button>
+					<button
+						type="button"
+						data-gallery-next
+						aria-label="Foto siguiente"
+						class="absolute top-1/2 right-3 -translate-y-1/2 rounded-full bg-cream/90 px-3 py-2 text-lg text-ink shadow transition hover:bg-cream"
+					>
+						›
+					</button>
+				</div>
+
+				<div class="mt-4 flex gap-3 overflow-x-auto pb-2">
+					{photos.map((photo, i) => (
+						<button
+							type="button"
+							data-gallery-thumb
+							aria-label={`Ver foto ${i + 1}`}
+							class:list={[
+								"shrink-0 overflow-hidden rounded-lg ring-2 ring-offset-2 ring-offset-cream transition",
+								i === 0 ? "ring-gold" : "ring-transparent",
+							]}
+						>
+							<Image
+								src={photo}
+								alt=""
+								width={120}
+								height={120}
+								loading="lazy"
+								class="h-16 w-16 object-cover"
+							/>
+						</button>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+)}
+
+<script>
+	function initGallery(root: HTMLElement) {
+		const fulls = Array.from(
+			root.querySelectorAll<HTMLElement>("[data-gallery-full]"),
+		);
+		const thumbs = Array.from(
+			root.querySelectorAll<HTMLElement>("[data-gallery-thumb]"),
+		);
+		let current = 0;
+
+		function show(index: number) {
+			current = (index + fulls.length) % fulls.length;
+			fulls.forEach((el, i) => el.classList.toggle("hidden", i !== current));
+			thumbs.forEach((el, i) => {
+				el.classList.toggle("ring-gold", i === current);
+				el.classList.toggle("ring-transparent", i !== current);
+			});
+		}
+
+		thumbs.forEach((thumb, i) =>
+			thumb.addEventListener("click", () => show(i)),
+		);
+		root
+			.querySelector("[data-gallery-prev]")
+			?.addEventListener("click", () => show(current - 1));
+		root
+			.querySelector("[data-gallery-next]")
+			?.addEventListener("click", () => show(current + 1));
+	}
+
+	document.querySelectorAll<HTMLElement>("[data-gallery]").forEach(initGallery);
+</script>

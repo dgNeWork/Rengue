@@ -1,0 +1,48 @@
+---
+import LegalPage from "../layouts/LegalPage.astro";
+import { contact, legal, site } from "../data/site";
+---
+
+<LegalPage title="Aviso legal">
+	<p>
+		En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de
+		Servicios de la Sociedad de la Información y de Comercio Electrónico
+		(LSSI-CE), se facilitan los siguientes datos: este sitio web (rengue.es) es
+		titularidad de <strong>{legal.ownerName}</strong>, con NIF{" "}
+		<strong>{legal.nif}</strong>, que opera bajo el nombre comercial{" "}
+		<strong>{legal.tradeName}</strong>, con domicilio en {contact.address}.
+		Puedes contactar a través de{" "}
+		<a href={`https://wa.me/${contact.whatsappNumber}`}>WhatsApp</a> o de{" "}
+		<a href={`https://instagram.com/${contact.instagramHandle}`}>Instagram</a>.
+	</p>
+
+	<h2>Objeto</h2>
+	<p>
+		Este sitio web tiene como finalidad dar a conocer la actividad de
+		{site.name}, mostrando una muestra de sus productos de bisutería y
+		complementos. Actualmente no se realizan ventas a través de este sitio web.
+	</p>
+
+	<h2>Propiedad intelectual e industrial</h2>
+	<p>
+		Los contenidos de este sitio web (textos, fotografías, logotipo y diseño)
+		son propiedad de {site.name} o se utilizan con la autorización
+		correspondiente. Queda prohibida su reproducción, distribución o
+		comunicación pública sin autorización previa.
+	</p>
+
+	<h2>Enlaces a terceros</h2>
+	<p>
+		Este sitio incluye enlaces a WhatsApp, Instagram y un mapa de Google Maps.{" "}
+		{site.name} no se hace responsable del contenido ni de las políticas de
+		privacidad de estos servicios de terceros, que se rigen por sus propias
+		condiciones.
+	</p>
+
+	<h2>Legislación aplicable</h2>
+	<p>
+		Las presentes condiciones se rigen por la legislación española. Para
+		cualquier controversia derivada del uso de este sitio web, las partes se
+		someten a los juzgados y tribunales que correspondan conforme a la ley.
+	</p>
+</LegalPage>

@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+
+// Muestra destacada en portada: solo las fotos de src/assets/coleccion/
+// (el resto de fotos de products/ salen en la Galería, no aquí).
+const productImages = import.meta.glob<{ default: ImageMetadata }>(
+	"../assets/coleccion/*.{jpeg,jpg,png}",
+	{ eager: true },
+);
+
+const categoryByKeyword: [string, string][] = [
+	["pendientes", "Pendientes"],
+	["collar", "Collares"],
+	["pulsera", "Pulseras"],
+	["anillo", "Anillos"],
+	["conjunto", "Conjuntos"],
+	["manton", "Mantones"],
+	["abanico", "Abanicos"],
+];
+
+function labelFromFilename(path: string) {
+	const fileName = path.split("/").pop() ?? "";
+	const withoutExt = fileName.replace(/\.(jpe?g|png)$/i, "");
+	const withoutOrder = withoutExt.replace(/^\d+/, "");
+	const spaced = withoutOrder.replace(/([a-z])([A-Z])/g, "$1 $2");
+	return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+}
+
+function categoryFromFilename(path: string) {
+	const lower = path.toLowerCase();
+	const match = categoryByKeyword.find(([keyword]) => lower.includes(keyword));
+	return match ? match[1] : "Complementos";
+}
+
+const items = Object.entries(productImages)
+	.sort(([a], [b]) => a.localeCompare(b))
+	.map(([path, mod]) => ({
+		image: mod.default,
+		name: labelFromFilename(path),
+		category: categoryFromFilename(path),
+	}));
+---
+
+<section id="coleccion" class="bg-gold-light/15 py-24">
+	<div class="mx-auto max-w-6xl px-6">
+		<div class="mx-auto max-w-2xl text-center">
+			<p class="text-sm uppercase tracking-[0.3em] text-gold-dark">Colección</p>
+			<h2 class="mt-4 font-serif text-3xl text-ink sm:text-4xl">
+				Pequeña muestra de nuestra colección
+			</h2>
+			<p class="mt-4 text-ink/70">
+				Un adelanto de nuestras piezas.{" "}
+				<a href="#galeria" class="underline hover:text-gold-dark">
+					Descubre más en la galería
+				</a>
+				.
+			</p>
+			<p class="mt-4 inline-block rounded-full border border-gold px-4 py-1.5 text-xs font-medium tracking-wide text-gold-dark uppercase">
+				Muy pronto: tienda online
+			</p>
+		</div>
+
+		<div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+			{items.map((item) => (
+				<article class="group overflow-hidden rounded-2xl bg-cream shadow-sm ring-1 ring-ink/5 transition hover:shadow-md">
+					<Image
+						src={item.image}
+						alt={item.name}
+						width={480}
+						height={480}
+						class="aspect-square w-full object-cover"
+					/>
+					<div class="p-5">
+						<p class="text-xs uppercase tracking-wide text-gold-dark">
+							{item.category}
+						</p>
+						<h3 class="mt-1 font-serif text-lg text-ink">{item.name}</h3>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>

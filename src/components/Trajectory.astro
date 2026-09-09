@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+// Foto fija para esta sección: si renombras/renumeras las fotos de
+// src/assets/pasarela/, actualiza también esta ruta.
+import photo from "../assets/pasarela/013pasarelaFlamencaJerez.jpeg";
+import { trajectory } from "../data/site";
+---
+
+<section class="bg-ink py-24 text-cream">
+	<div class="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-2 md:items-center">
+		<Image
+			src={photo}
+			alt="Modelo en la Pasarela Flamenca de Jerez con piezas de Rengue"
+			width={640}
+			height={800}
+			class="aspect-[4/5] w-full rounded-2xl object-cover"
+		/>
+
+		<div>
+			<p class="text-sm uppercase tracking-[0.3em] text-gold-light">
+				{trajectory.eyebrow}
+			</p>
+			<h2 class="mt-4 font-serif text-3xl sm:text-4xl">
+				{trajectory.headline}
+			</h2>
+			<p class="mt-6 text-cream/80">{trajectory.body}</p>
+		</div>
+	</div>
+</section>

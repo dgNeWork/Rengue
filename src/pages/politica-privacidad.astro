@@ -1,0 +1,55 @@
+---
+import LegalPage from "../layouts/LegalPage.astro";
+import { contact, legal, site } from "../data/site";
+---
+
+<LegalPage title="Política de privacidad">
+	<h2>Responsable del tratamiento</h2>
+	<p>
+		<strong>{legal.ownerName}</strong> ({legal.tradeName}), con NIF {legal.nif}{" "}
+		y domicilio en {contact.address}, es la responsable del tratamiento de los
+		datos a los que se refiere esta política.
+	</p>
+
+	<h2>Qué datos tratamos</h2>
+	<p>
+		Este sitio web no tiene formularios de contacto ni recoge datos personales
+		directamente. Al navegar por el sitio, nuestro proveedor de alojamiento
+		(Vercel) puede procesar datos técnicos básicos (como la dirección IP)
+		necesarios para el funcionamiento del servicio, conforme a su propia
+		política de privacidad.
+	</p>
+	<p>
+		La sección de contacto incluye un mapa de Google Maps incrustado. Al
+		cargarse, Google puede tratar determinados datos técnicos conforme a su
+		propia política de privacidad.
+	</p>
+	<p>Este sitio no utiliza cookies propias de analítica ni de publicidad.</p>
+
+	<h2>Enlaces a WhatsApp e Instagram</h2>
+	<p>
+		Los botones de contacto de este sitio enlazan a WhatsApp e Instagram. Al
+		usarlos, sales de este sitio web y los datos que compartas se rigen por las
+		políticas de privacidad de Meta, ajenas a {site.name}.
+	</p>
+
+	<h2>Tus derechos</h2>
+	<p>
+		Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición,
+		limitación y portabilidad escribiéndonos a través de{" "}
+		<a href={`https://wa.me/${contact.whatsappNumber}`}>WhatsApp</a> o{" "}
+		<a href={`https://instagram.com/${contact.instagramHandle}`}>Instagram</a>,
+		o por correo postal a la dirección indicada arriba. También tienes derecho a
+		presentar una reclamación ante la{" "}
+		<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">
+			Agencia Española de Protección de Datos
+		</a>{" "}
+		si consideras que no hemos tratado tus datos correctamente.
+	</p>
+
+	<h2>Cambios en esta política</h2>
+	<p>
+		Esta política podrá actualizarse para adaptarse a futuros cambios en el
+		sitio web — por ejemplo, cuando se incorpore la venta online.
+	</p>
+</LegalPage>

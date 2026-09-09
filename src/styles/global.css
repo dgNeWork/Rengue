@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+	/* Paleta inspirada en el logo (negro/blanco), con el dorado como acento puntual */
+	--color-cream: #f7f5f2;
+	--color-ink: #161514;
+	--color-gold: #b7935a;
+	--color-gold-light: #e9d9be;
+	--color-gold-dark: #8f7143;
+
+	--font-serif: "Playfair Display", "Georgia", serif;
+	--font-sans: "Inter", system-ui, sans-serif;
+	/* Script cercano al trazo cursivo del logo — solo para el nombre de marca */
+	--font-script: "Alex Brush", cursive;
+}
+
+html {
+	scroll-behavior: smooth;
+}

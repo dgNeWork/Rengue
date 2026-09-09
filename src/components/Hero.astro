@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.jpg";
+import { hero } from "../data/site";
+---
+
+<section class="relative flex min-h-screen items-center overflow-hidden bg-ink pt-24">
+	<div class="absolute inset-0 bg-gradient-to-br from-ink via-ink to-gold-dark/30"></div>
+
+	<div class="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
+		<div>
+			<p class="mb-4 text-sm uppercase tracking-[0.3em] text-gold-light">
+				{hero.eyebrow}
+			</p>
+			<h1 class="font-serif text-4xl leading-tight text-cream sm:text-5xl">
+				{hero.headline}
+			</h1>
+			<p class="mt-6 max-w-md text-cream/80">{hero.body}</p>
+			<div class="mt-8 flex flex-wrap gap-4">
+				<a
+					href="#coleccion"
+					class="rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink transition hover:bg-gold-light"
+				>
+					Ver colección
+				</a>
+				<a
+					href="#contacto"
+					class="rounded-full border border-cream/40 px-6 py-3 text-sm font-semibold text-cream transition hover:border-cream"
+				>
+					Contactar por WhatsApp
+				</a>
+			</div>
+		</div>
+
+		<div class="justify-self-center md:justify-self-end">
+			<Image
+				src={logo}
+				alt="Rengue"
+				width={420}
+				height={420}
+				class="w-full max-w-xs rounded-full shadow-2xl ring-1 ring-gold/20 sm:max-w-sm"
+			/>
+		</div>
+	</div>
+</section>
