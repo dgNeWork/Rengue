@@ -1,6 +1,6 @@
 # Progreso del proyecto
 
-Última actualización: 2026-09-09
+Última actualización: 2026-09-29
 
 ## Estado: 🟢 En producción
 
@@ -26,7 +26,6 @@ prácticamente terminada.
 - Dominio: **rengue.es** — comprado, conectado y funcionando (A record a
   Vercel: `216.198.79.1`; CNAME de `www` al DNS de Vercel).
 - Paleta: negro/blanco (a juego con el logo) con dorado como acento puntual.
-- Los commits los hace el usuario desde su propia terminal (no Claude).
 
 ## Hecho
 
@@ -52,7 +51,9 @@ prácticamente terminada.
       (Raquel Domínguez Labajo, NIF 31702281R). **Pendiente de que la
       gestoría les eche un vistazo — no es asesoría legal.**
 - [x] Prettier + `astro check` + build de producción, todo sin errores.
-- [x] Repositorio Git en GitHub, un único commit (sin firma de Claude).
+- [x] Repositorio Git en GitHub.
+- [x] Análisis de calidad con SonarCloud en GitHub Actions (en cada push a
+      `main` y en cada pull request).
 - [x] Desplegado en Vercel y dominio `rengue.es` conectado y verificado.
 
 ## Pendiente — sin prisa
